@@ -1,0 +1,35 @@
+GET http://localhost:8181/v1/policies
+Accept: application/json
+
+###
+
+GET http://localhost:8181/v1/policies/simple1
+Accept: application/json
+
+###
+
+
+PUT http://localhost:8181/v1/policies/simple1
+Content-Type: application/text
+
+package example.authz
+import future.keywords.if
+
+default allow := false
+
+allow if {
+    input.user = "john"
+}
+
+###
+
+POST http://localhost:8181/v1/data/example/authz/allow
+Content-Type: application/json
+
+{
+  "input": {
+    "user": "john"
+  }
+}
+
+###

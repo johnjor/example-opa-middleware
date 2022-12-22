@@ -1,0 +1,47 @@
+GET http://localhost:8080/foo
+Accept: application/json
+Authorization: Bearer john
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+###
+
+GET http://localhost:8080/bar
+Accept: application/json
+Authorization: Bearer john
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+###
+
+GET http://localhost:8080/foo
+Accept: application/json
+Authorization: Bearer lilly
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 401, "Response status is not 200");
+    });
+%}
+
+###
+
+GET http://localhost:8080/bar
+Accept: application/json
+Authorization: Bearer lilly
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 401, "Response status is not 200");
+    });
+%}
+
+###
